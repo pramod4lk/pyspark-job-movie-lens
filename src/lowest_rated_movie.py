@@ -1,7 +1,7 @@
 from dataclasses import fields
 from json import load
 from unittest import result
-from pyspark import F, SparkConf, SparkContext
+from pyspark import SparkConf, SparkContext
 from dataclasses import fields, field
 
 def load_movie_names():
