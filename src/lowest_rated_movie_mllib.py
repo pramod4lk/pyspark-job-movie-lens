@@ -4,10 +4,10 @@ from pyspark.ml.recommendation import ALS
 
 def load_movie_names():
     movie_names = {}
-    with open("ml-100k/u.item") as f:
+    with open("/home/pramod4lk/Documents/pyspark-job-movie-lens/data/ml-100k/u.item", encoding = "ISO-8859-1") as f:
         for line in f:
             fields = line.split('|')
-            movie_names[int(fields[0])] = fields[1].decode('ascii', 'ignore')
+            movie_names[int(fields[0])] = fields[1]#.decode('ascii', 'ignore')
     return movie_names
 
 def parse_input(line):
@@ -18,9 +18,11 @@ if __name__ == "__main__":
 
     spark = SparkSession.builder.appName("MovieRecs").getOrCreate()
 
+    spark.sparkContext.setLogLevel("ERROR")
+
     movie_names = load_movie_names()
 
-    lines = spark.read.text("hdfs:///user/maria_dev/ml-100k/u.data").rdd
+    lines = spark.read.text("/home/pramod4lk/Documents/pyspark-job-movie-lens/data/ml-100k/u.data").rdd
 
     rating_rdd = lines.map(parse_input)
 
