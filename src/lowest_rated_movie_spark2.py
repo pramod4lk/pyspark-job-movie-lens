@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession, Row, functions
 
 def load_movie_names():
     movie_names = {}
-    with open("data/ml-100k/u.item") as f:
+    with open("ml-100k/u.item") as f:
         for line in f:
             fields = line.split('|')
             movie_names[int(fields[0])] = fields[1]
@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     movie_names = load_movie_names()
 
-    lines = spark.sparkContext.textFile('hdfs:///user/maria_dev/sampledata/ml-100k/u.data')
+    lines = spark.sparkContext.textFile('hdfs:///user/maria_dev/ml-100k/u.data')
 
     movies = lines.map(parse_input)
 
