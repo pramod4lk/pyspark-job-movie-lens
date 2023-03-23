@@ -25,6 +25,7 @@ if __name__ == "__main__":
     # Get raw data
     lines = spark.read.text("/home/pramod4lk/Documents/pyspark-job-movie-lens/data/ml-100k/u.data").rdd
 
+    # Convert the same to RDD
     rating_rdd = lines.map(parse_input)
 
     ratings = spark.createDataFrame(rating_rdd).cache()
