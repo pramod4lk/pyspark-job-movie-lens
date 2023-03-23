@@ -22,6 +22,7 @@ if __name__ == "__main__":
 
     movie_names = load_movie_names()
 
+    # Get raw data
     lines = spark.read.text("/home/pramod4lk/Documents/pyspark-job-movie-lens/data/ml-100k/u.data").rdd
 
     rating_rdd = lines.map(parse_input)
